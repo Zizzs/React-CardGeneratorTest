@@ -15,11 +15,23 @@ class CardGeneration extends Component {
     four: 0,
     fourRarity: 0,
     five: 0,
-    fiveRarity: 0
+    fiveRarity: 0,
+    six: 0,
+    sixRarity: 0,
+    seven: 0,
+    sevenRarity: 0,
+    eight: 0,
+    eightRarity: 0,
+    nine: 0,
+    nineRarity: 0,
+    ten: 0,
+    tenRarity: 0,
+    savedCards: []
   };
   render() {
     let generateCard = () => {
-      let amountOfStats = createCard();
+      let item = createCard();
+      let amountOfStats = item.stats.length;
       if (amountOfStats === 0) {
         let total = this.state.zero;
         total++;
@@ -44,6 +56,36 @@ class CardGeneration extends Component {
         let total = this.state.five;
         total++;
         this.setState({ five: total });
+      } else if (amountOfStats === 6) {
+        let total = this.state.six;
+        total++;
+        let tempCards = this.state.savedCards;
+        tempCards.push(item);
+        this.setState({ six: total, savedCards: tempCards });
+      } else if (amountOfStats === 7) {
+        let total = this.state.seven;
+        total++;
+        let tempCards = this.state.savedCards;
+        tempCards.push(item);
+        this.setState({ seven: total, savedCards: tempCards });
+      } else if (amountOfStats === 8) {
+        let total = this.state.eight;
+        total++;
+        let tempCards = this.state.savedCards;
+        tempCards.push(item);
+        this.setState({ eight: total, savedCards: tempCards });
+      } else if (amountOfStats === 9) {
+        let total = this.state.nine;
+        total++;
+        let tempCards = this.state.savedCards;
+        tempCards.push(item);
+        this.setState({ nine: total, savedCards: tempCards });
+      } else if (amountOfStats === 10) {
+        let total = this.state.ten;
+        total++;
+        let tempCards = this.state.savedCards;
+        tempCards.push(item);
+        this.setState({ ten: total, savedCards: tempCards });
       }
     };
     let calculateRarities = () => {
@@ -53,30 +95,55 @@ class CardGeneration extends Component {
         this.state.two +
         this.state.three +
         this.state.four +
-        this.state.five;
+        this.state.five +
+        this.state.six +
+        this.state.seven +
+        this.state.eight +
+        this.state.nine +
+        this.state.ten;
       let zeroRarity = (this.state.zero / total) * 100;
-      zeroRarity = Math.max(Math.round(zeroRarity * 100) / 100).toFixed(3);
+      zeroRarity = Math.max(Math.round(zeroRarity * 1000) / 1000).toFixed(4);
       this.setState({ zeroRarity });
 
       let oneRarity = (this.state.one / total) * 100;
-      oneRarity = Math.max(Math.round(oneRarity * 100) / 100).toFixed(3);
+      oneRarity = Math.max(Math.round(oneRarity * 1000) / 1000).toFixed(4);
       this.setState({ oneRarity });
 
       let twoRarity = (this.state.two / total) * 100;
-      twoRarity = Math.max(Math.round(twoRarity * 100) / 100).toFixed(3);
+      twoRarity = Math.max(Math.round(twoRarity * 1000) / 1000).toFixed(4);
       this.setState({ twoRarity });
 
       let threeRarity = (this.state.three / total) * 100;
-      threeRarity = Math.max(Math.round(threeRarity * 100) / 100).toFixed(3);
+      threeRarity = Math.max(Math.round(threeRarity * 1000) / 1000).toFixed(4);
       this.setState({ threeRarity });
 
       let fourRarity = (this.state.four / total) * 100;
-      fourRarity = Math.max(Math.round(fourRarity * 100) / 100).toFixed(3);
+      fourRarity = Math.max(Math.round(fourRarity * 1000) / 1000).toFixed(4);
       this.setState({ fourRarity });
 
       let fiveRarity = (this.state.five / total) * 100;
-      fiveRarity = Math.max(Math.round(fiveRarity * 100) / 100).toFixed(3);
+      fiveRarity = Math.max(Math.round(fiveRarity * 1000) / 1000).toFixed(4);
       this.setState({ fiveRarity });
+
+      let sixRarity = (this.state.six / total) * 100;
+      sixRarity = Math.max(Math.round(sixRarity * 1000) / 1000).toFixed(4);
+      this.setState({ sixRarity });
+
+      let sevenRarity = (this.state.seven / total) * 100;
+      sevenRarity = Math.max(Math.round(sevenRarity * 1000) / 1000).toFixed(4);
+      this.setState({ sevenRarity });
+
+      let eightRarity = (this.state.eight / total) * 100;
+      eightRarity = Math.max(Math.round(eightRarity * 1000) / 1000).toFixed(4);
+      this.setState({ eightRarity });
+
+      let nineRarity = (this.state.nine / total) * 100;
+      nineRarity = Math.max(Math.round(nineRarity * 1000) / 1000).toFixed(4);
+      this.setState({ nineRarity });
+
+      let tenRarity = (this.state.ten / total) * 100;
+      tenRarity = Math.max(Math.round(tenRarity * 1000) / 1000).toFixed(4);
+      this.setState({ tenRarity });
     };
 
     let generateHundredCards = () => {
@@ -85,7 +152,7 @@ class CardGeneration extends Component {
         setTimeout(function() {
           generateCard();
           calculateRarities();
-        }, 250);
+        }, 500);
         hundred--;
       }
     };
@@ -124,10 +191,65 @@ class CardGeneration extends Component {
               <p>Five Stat Rarity: </p>
               <p>{this.state.fiveRarity}%</p>
             </div>
+            <div>
+              <p>Total Items with Six Stats: {this.state.six}</p>
+              <p>Six Stat Rarity: </p>
+              <p>{this.state.sixRarity}%</p>
+            </div>
+            <div>
+              <p>Total Items with Seven Stat: {this.state.seven}</p>
+              <p>Seven Stat Rarity: </p>
+              <p>{this.state.sevenRarity}%</p>
+            </div>
+            <div>
+              <p>Total Items with Eight Stats: {this.state.eight}</p>
+              <p>Eight Stat Rarity: </p>
+              <p>{this.state.eightRarity}%</p>
+            </div>
+            <div>
+              <p>Total Items with Nine Stats: {this.state.nine}</p>
+              <p>Nine Stat Rarity: </p>
+              <p>{this.state.nineRarity}%</p>
+            </div>
+            <div>
+              <p>Total Items with Ten Stats: {this.state.ten}</p>
+              <p>Ten Stat Rarity: </p>
+              <p>{this.state.tenRarity}%</p>
+            </div>
           </div>
         </div>
         <button onClick={generateCard}>Generate a Card</button>
         <button onClick={generateHundredCards}>Generate 100000 Cards</button>
+        <div>
+          {this.state.savedCards.map(card => {
+            return (
+              <div key={this.state.savedCards.indexOf(card)}>
+                <hr />
+                <p>
+                  {card.type} Card ({card.stats.length})
+                </p>
+                {card.stats.map(stat => {
+                  return (
+                    <div className="statDiv" key={card.stats.indexOf(stat)}>
+                      <div>
+                        <p>{stat.name}</p>
+                      </div>
+                      <div>
+                        <p>{stat.type}</p>
+                      </div>
+                      <div>
+                        <p>{stat.modifier}</p>
+                      </div>
+                      <div>
+                        <p>{stat.value}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }

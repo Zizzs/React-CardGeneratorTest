@@ -7,7 +7,7 @@ export default function createCard() {
     stats: []
   };
   //Uses the calculateNumberOfStats function to generate the amount of stats an item will have
-  let amountOfPassedRolls = calculateNumberOfStats(stats);
+  let amountOfPassedRolls = calculateNumberOfStats(stats) - 1;
 
   //Uses the calculateCardType function to determine what type of card it will be
   let cardType = calculateCardType();
@@ -26,12 +26,12 @@ export default function createCard() {
     //Removes the pushed stat from the array
     tempStats.splice(roll, 1);
   }
-  console.log(item);
-  return amountOfPassedRolls;
+
+  return item;
 }
 
 function rollHundred() {
-  let roll = Math.floor(Math.random() * 100);
+  let roll = Math.random() * 100;
   return roll;
 }
 
@@ -41,10 +41,10 @@ function calculateNumberOfStats(stats) {
   let amountOfPassedRolls = 0;
 
   //Starting chance of getting 1 stat at 50%
-  let starterLine = 50;
+  let starterLine = 40;
 
   //The number that will be manipulated and added to starterLine to increase the rarity that the next stat will be added
-  let rollIncrease = 50;
+  let rollIncrease = 40;
 
   //A boolean to determine if a roll has passed or failed
   let passedARoll = false;
@@ -60,7 +60,7 @@ function calculateNumberOfStats(stats) {
     //If during the previous pass through the while loop that passedARoll is true, the following happens
     if (passedARoll === true) {
       //The variable extra is created by dividing the current rollIncrease value by 2 (Initial = 50 / 2)
-      let extra = Math.floor(rollIncrease / 2);
+      let extra = rollIncrease / 2;
       //Subtract extra from rollIncrease so that it gets half as small every run through the loop. (So that a smaller amount is added to starterLine)
       rollIncrease -= extra;
       //Add extra to starterline to increase the number required to hit to add another stat(50 => 25 => 12.5 => 6.25 => etc...)
