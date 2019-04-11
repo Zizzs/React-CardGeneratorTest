@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import CardGeneration from "./components/CardGeneration/CardGeneration";
+import Wrapper from "./components/Wrapper/Wrapper";
 import "./App.css";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <CardGeneration />
+        <Wrapper />
       </div>
     );
   }
