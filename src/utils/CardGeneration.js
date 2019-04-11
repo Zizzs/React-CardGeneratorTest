@@ -13,6 +13,7 @@ export default function createCard() {
   let cardType = calculateCardType();
   item.type = cardType;
 
+  //let randomizedStats = randomizeStatValues(stats);
   //------Application of stats to the item-------
   //Duplicates the Stats Array
   let tempStats = stats.slice(0);
@@ -21,11 +22,25 @@ export default function createCard() {
   for (let i = 0; i <= amountOfPassedRolls; i++) {
     //Creates a random number between 0 and the amount of stats in the stats array.
     let roll = Math.floor(Math.random() * tempStats.length);
-    //Uses the number from above as the index for the stats arrow to choose which stat is given to the item
-    item.stats.push(tempStats[roll]);
+    //Grabs the object from within the stats array that corresponds to the roll index
+    let object = tempStats.slice(roll, roll + 1)[0];
+    //Converts the object into a JSON string, then back into a JSON object to remove the pointer to fix a bug where modifying a stat will modify all stats.
+    let tempStat = JSON.parse(JSON.stringify(object));
+
+    if (
+      tempStat.type === "Attack" ||
+      tempStat.type === "Shield" ||
+      tempStat.type === "DoT" ||
+      tempStat.type === "Rarity" ||
+      tempStat.type === "Armor"
+    ) {
+      tempStat.value = Math.floor(Math.random() * 10) + 1;
+    }
+    item.stats.push(tempStat);
     //Removes the pushed stat from the array
     tempStats.splice(roll, 1);
   }
+  console.log(item);
 
   return item;
 }
@@ -34,6 +49,22 @@ function rollHundred() {
   let roll = Math.random() * 100;
   return roll;
 }
+
+// function randomizeStatValues(stats) {
+//   let tempStats = stats.slice(0);
+//   for (let stat of tempStats) {
+//     if (
+//       stat.type === "Attack" ||
+//       stat.type === "Shield" ||
+//       stat.type === "DoT" ||
+//       stat.type === "Rarity" ||
+//       stat.type === "Armor"
+//     ) {
+//       stat.value = Math.floor(Math.random() * 10) + 1;
+//     }
+//   }
+//   return tempStats;
+// }
 
 //Function that determines how many rolls an item will have
 function calculateNumberOfStats(stats) {

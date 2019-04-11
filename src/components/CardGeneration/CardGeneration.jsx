@@ -59,7 +59,7 @@ class CardGeneration extends Component {
       } else if (amountOfStats === 6) {
         let total = this.state.six;
         total++;
-        let tempCards = this.state.savedCards;
+        let tempCards = this.state.savedCards.slice(0);
         tempCards.push(item);
         this.setState({ six: total, savedCards: tempCards });
       } else if (amountOfStats === 7) {
